@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+
+  postgres:
+    image: postgres:16
+    container_name: buraq-postgres
+    environment:
+      POSTGRES_DB: buraq_db
+      POSTGRES_USER: buraq_user
+      POSTGRES_PASSWORD: buraq_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: buraq-chromadb
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: buraq-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@buraq.ai
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
+  chroma_data:
