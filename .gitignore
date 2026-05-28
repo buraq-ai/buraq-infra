@@ -1,0 +1,18 @@
+# Environment secrets - NEVER commit
+.env
+
+# Docker volumes (local data)
+volumes/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+*.log
